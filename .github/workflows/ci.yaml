@@ -44,11 +44,9 @@ jobs:
            go-version: 1.22
         
         - name: Run golangci-lint
-          uses: golangci/golangci-lint-action@v6
-          with:
-            version: v1.55.2
-            run: golangci-lint run
-            working-directory: src/product-catalog
+          run: |
+               go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.56.2
+               golangci-lint run src/product-catalog/...
 
     docker:
         runs-on: ubuntu-latest
@@ -98,11 +96,4 @@ jobs:
             git config --global user.name "Abhishek Veeramalla"
             git add kubernetes/productcatalog/deploy.yaml
             git commit -m "[CI]: Update product catalog image tag"
-            git push origin HEAD:main -f
-
-        
-        
-          
-
-
-        
+            git push
